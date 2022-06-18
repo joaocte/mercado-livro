@@ -1,7 +1,6 @@
-package com.mercadolivro.model
+package com.mercadolivro.domain
 
-import java.util.EnumMap
-import java.util.UUID
+import java.util.*
 
 data class CustomerModel (
 

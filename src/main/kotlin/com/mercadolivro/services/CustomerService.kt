@@ -1,16 +1,14 @@
 package com.mercadolivro.services
 
-import com.mercadolivro.application.command.CreateCustomerCommand
 import com.mercadolivro.application.command.DeleteCustomerByIdCommand
 import com.mercadolivro.application.command.UpdateCustomerCommand
 import com.mercadolivro.application.query.GetCustomerByIdQuery
-import com.mercadolivro.extension.toCustomerModel
-import com.mercadolivro.model.CustomerModel
+import com.mercadolivro.domain.CustomerModel
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
-class CustomerService : ICustomerService {
+class CustomerService(
+) : ICustomerService {
     val customers = mutableListOf<CustomerModel>()
     override fun getAll(name: String?): List<CustomerModel> {
         name?.let {
@@ -21,9 +19,6 @@ class CustomerService : ICustomerService {
         return customers
     }
 
-    override fun createCustomer(createCustomerCommand: CreateCustomerCommand) {
-        customers.add(createCustomerCommand.toCustomerModel())
-    }
 
     override fun getById(getCustomerByIdQuery: GetCustomerByIdQuery): CustomerModel {
         return customers.first{it.id ==getCustomerByIdQuery.id}
