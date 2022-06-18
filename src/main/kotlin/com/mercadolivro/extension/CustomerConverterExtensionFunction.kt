@@ -6,6 +6,7 @@ import com.mercadolivro.application.command.UpdateCustomerCommand
 import com.mercadolivro.application.query.GetCustomerByIdQuery
 import com.mercadolivro.application.request.CreateCustomerRequest
 import com.mercadolivro.application.request.UpdateCustomerRequest
+import com.mercadolivro.model.CustomerModel
 import java.util.*
 
 fun CreateCustomerRequest.toCreateCustomerCommand(): CreateCustomerCommand{
@@ -23,4 +24,11 @@ fun UUID.toGetCustomerByIdQuery() : GetCustomerByIdQuery{
 
 fun UUID.toDeleteCustomerByIdCommand(): DeleteCustomerByIdCommand{
     return DeleteCustomerByIdCommand(this)
+}
+
+fun CreateCustomerCommand.toCustomerModel() : CustomerModel{
+    return CustomerModel(this.id, this.name, this.email)
+}
+fun UpdateCustomerCommand.toCustomerModel(): CustomerModel{
+    return CustomerModel(this.id, this.name, this.email)
 }

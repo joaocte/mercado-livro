@@ -4,6 +4,7 @@ import com.mercadolivro.application.command.CreateCustomerCommand
 import com.mercadolivro.application.command.DeleteCustomerByIdCommand
 import com.mercadolivro.application.command.UpdateCustomerCommand
 import com.mercadolivro.application.query.GetCustomerByIdQuery
+import com.mercadolivro.extension.toCustomerModel
 import com.mercadolivro.model.CustomerModel
 import org.springframework.stereotype.Service
 import java.util.*
@@ -21,7 +22,7 @@ class CustomerService : ICustomerService {
     }
 
     override fun createCustomer(createCustomerCommand: CreateCustomerCommand) {
-        customers.add(CustomerModel(createCustomerCommand.id, createCustomerCommand.name, createCustomerCommand.email))
+        customers.add(createCustomerCommand.toCustomerModel())
     }
 
     override fun getById(getCustomerByIdQuery: GetCustomerByIdQuery): CustomerModel {
