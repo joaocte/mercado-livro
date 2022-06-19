@@ -2,9 +2,9 @@ package com.mercadolivro.domain
 
 import java.util.*
 
-data class CustomerModel (
+data class Customer (
 
-    var id: UUID,
+    var id: Long?,
     var name: String,
     var email: String
 

@@ -2,6 +2,7 @@ package com.mercadolivro.application.usecase.createCustomer
 
 import com.mercadolivro.application.command.CreateCustomerCommand
 import com.mercadolivro.extension.toCustomerModelInfra
+import com.mercadolivro.infrastructure.model.CustomerModel
 import com.mercadolivro.infrastructure.repository.CustomerRepository
 import org.springframework.stereotype.Service
 
@@ -12,11 +13,10 @@ class CreateCustomerUsecase (private val customerRepository: CustomerRepository)
 
         val customer = createCustomerCommand.toCustomerModelInfra();
 
-        var customerAlreadyRegistered =  customerRepository.existsById(customer.id)
+        var customerAlreadyRegistered = customerRepository.existsByEmail(createCustomerCommand.email)
 
-        if(customerAlreadyRegistered) {
-            throw Exception("Customer Already Registered")
-        }
+        if(customerAlreadyRegistered)
+             throw Exception("E-mail Already Registered")
 
         customerRepository.save(customer)
 

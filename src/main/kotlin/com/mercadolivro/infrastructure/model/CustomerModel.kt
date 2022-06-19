@@ -1,15 +1,14 @@
 package com.mercadolivro.infrastructure.model
 
 import java.util.UUID
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity(name="customer")
 data class CustomerModel(
 
     @Id
-    var id: UUID,
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    var id: Long?,
     @Column
     var name: String,
     @Column

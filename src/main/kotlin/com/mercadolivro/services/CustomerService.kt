@@ -3,14 +3,14 @@ package com.mercadolivro.services
 import com.mercadolivro.application.command.DeleteCustomerByIdCommand
 import com.mercadolivro.application.command.UpdateCustomerCommand
 import com.mercadolivro.application.query.GetCustomerByIdQuery
-import com.mercadolivro.domain.CustomerModel
+import com.mercadolivro.domain.Customer
 import org.springframework.stereotype.Service
 
 @Service
 class CustomerService(
 ) : ICustomerService {
-    val customers = mutableListOf<CustomerModel>()
-    override fun getAll(name: String?): List<CustomerModel> {
+    val customers = mutableListOf<Customer>()
+    override fun getAll(name: String?): List<Customer> {
         name?.let {
             return  customers.filter {
                 it.name.contains(name,true)
@@ -20,7 +20,7 @@ class CustomerService(
     }
 
 
-    override fun getById(getCustomerByIdQuery: GetCustomerByIdQuery): CustomerModel {
+    override fun getById(getCustomerByIdQuery: GetCustomerByIdQuery): Customer {
         return customers.first{it.id ==getCustomerByIdQuery.id}
     }
 
