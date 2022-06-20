@@ -3,12 +3,12 @@ package com.mercadolivro.controller
 import com.mercadolivro.application.request.CreateCustomerRequest
 import com.mercadolivro.application.request.UpdateCustomerRequest
 import com.mercadolivro.application.usecase.createCustomer.ICreateCustomerUseCase
-import com.mercadolivro.application.usecase.getcustomer.GetAllCustomersUseCase
-import com.mercadolivro.application.usecase.getcustomer.GetCustomerByIdUseCase
-import com.mercadolivro.application.usecase.updateCustomer.UpdateCustomerUseCase
+import com.mercadolivro.application.usecase.deleteCustomer.IDeleteCustomerUseCase
+import com.mercadolivro.application.usecase.getcustomer.IGetAllCustomersUseCase
+import com.mercadolivro.application.usecase.getcustomer.IGetCustomerByIdUseCase
+import com.mercadolivro.application.usecase.updateCustomer.IUpdateCustomerUseCase
 import com.mercadolivro.domain.Customer
 import com.mercadolivro.extension.*
-import com.mercadolivro.services.ICustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -16,11 +16,11 @@ import java.util.*
 @RestController
 @RequestMapping("customers")
 class CustomersController (
-    private val customerService: ICustomerService,
     private val createCustomerUseCase: ICreateCustomerUseCase,
-    private val getCustomerById: GetCustomerByIdUseCase,
-    private val getAllCustomersUseCase: GetAllCustomersUseCase,
-    private val updateCustomerUsecase: UpdateCustomerUseCase
+    private val getCustomerById: IGetCustomerByIdUseCase,
+    private val getAllCustomersUseCase: IGetAllCustomersUseCase,
+    private val updateCustomerUsecase: IUpdateCustomerUseCase,
+    private val deleteCustomerUseCase: IDeleteCustomerUseCase
                            ) {
 
 
@@ -50,6 +50,6 @@ class CustomersController (
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteCustomer(@PathVariable id: Long){
-       customerService.deleteCustomer(id.toDeleteCustomerByIdCommand())
+        deleteCustomerUseCase.execute(id.toDeleteCustomerByIdCommand())
     }
 }
