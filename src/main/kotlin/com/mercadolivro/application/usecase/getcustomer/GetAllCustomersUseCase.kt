@@ -3,11 +3,11 @@ package com.mercadolivro.application.usecase.getcustomer
 import com.mercadolivro.application.query.GetAllCustomersFilter
 import com.mercadolivro.domain.Customer
 import com.mercadolivro.extension.toDomain
-import com.mercadolivro.infrastructure.repository.CustomerRepository
+import com.mercadolivro.infrastructure.repository.ICustomerRepository
 import org.springframework.stereotype.Service
 
 @Service
-class GetAllCustomersUseCase(private val customerRepository: CustomerRepository) : IGetAllCustomersUseCase {
+class GetAllCustomersUseCase(private val ICustomerRepository: ICustomerRepository) : IGetAllCustomersUseCase {
 
 
 
@@ -15,8 +15,8 @@ class GetAllCustomersUseCase(private val customerRepository: CustomerRepository)
 
         getAllCustomersFilter?.name?.let{
             var name = getAllCustomersFilter.name
-         return customerRepository.findByNameContaining(name).map { it.toDomain() }
+         return ICustomerRepository.findByNameContaining(name).map { it.toDomain() }
         }
-        return customerRepository.findAll().map { it.toDomain() }
+        return ICustomerRepository.findAll().map { it.toDomain() }
     }
 }
