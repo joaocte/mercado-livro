@@ -15,7 +15,7 @@ class GetAllCustomersUseCase(private val customerRepository: CustomerRepository)
 
         getAllCustomersFilter?.name?.let{
             var name = getAllCustomersFilter.name
-         return customerRepository.findByNameContaining(name!!).map { it.toDomain() }
+         return customerRepository.findByNameContaining(name).map { it.toDomain() }
         }
         return customerRepository.findAll().map { it.toDomain() }
     }
