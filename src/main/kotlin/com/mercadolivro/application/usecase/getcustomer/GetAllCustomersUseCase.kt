@@ -14,7 +14,7 @@ class GetAllCustomersUseCase(private val customerRepository: CustomerRepository)
     override fun execute(getAllCustomersFilter: GetAllCustomersFilter?): List<Customer> {
 
         getAllCustomersFilter?.name?.let{
-            var name = getAllCustomersFilter!!.name
+            var name = getAllCustomersFilter.name
          return customerRepository.findByNameContaining(name!!).map { it.toDomain() }
         }
         return customerRepository.findAll().map { it.toDomain() }
