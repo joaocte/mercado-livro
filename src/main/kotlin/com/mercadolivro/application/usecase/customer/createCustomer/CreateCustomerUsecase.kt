@@ -1,4 +1,4 @@
-package com.mercadolivro.application.usecase.createCustomer
+package com.mercadolivro.application.usecase.customer.createCustomer
 
 import com.mercadolivro.application.command.CreateCustomerCommand
 import com.mercadolivro.extension.toCustomerModelInfra

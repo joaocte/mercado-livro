@@ -2,11 +2,12 @@ package com.mercadolivro.controller
 
 import com.mercadolivro.application.request.CreateCustomerRequest
 import com.mercadolivro.application.request.UpdateCustomerRequest
-import com.mercadolivro.application.usecase.createCustomer.ICreateCustomerUseCase
-import com.mercadolivro.application.usecase.deleteCustomer.IDeleteCustomerUseCase
-import com.mercadolivro.application.usecase.getcustomer.IGetAllCustomersUseCase
-import com.mercadolivro.application.usecase.getcustomer.IGetCustomerByIdUseCase
-import com.mercadolivro.application.usecase.updateCustomer.IUpdateCustomerUseCase
+import com.mercadolivro.application.usecase.customer.createCustomer.ICreateCustomerUseCase
+import com.mercadolivro.application.usecase.customer.deleteCustomer.IDeleteCustomerUseCase
+import com.mercadolivro.application.usecase.customer.getcustomer.IGetAllCustomersUseCase
+import com.mercadolivro.application.usecase.customer.getcustomer.IGetCustomerByIdUseCase
+import com.mercadolivro.application.usecase.customer.updateCustomer.IUpdateCustomerUseCase
+import com.mercadolivro.controller.extension.*
 import com.mercadolivro.domain.Customer
 import com.mercadolivro.extension.*
 import org.springframework.http.HttpStatus

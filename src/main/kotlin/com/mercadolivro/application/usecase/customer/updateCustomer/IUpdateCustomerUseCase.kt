@@ -1,4 +1,4 @@
-package com.mercadolivro.application.usecase.updateCustomer
+package com.mercadolivro.application.usecase.customer.updateCustomer
 
 import com.mercadolivro.application.command.UpdateCustomerCommand
 

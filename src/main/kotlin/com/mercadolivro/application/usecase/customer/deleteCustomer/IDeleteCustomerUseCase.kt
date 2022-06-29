@@ -1,4 +1,4 @@
-package com.mercadolivro.application.usecase.deleteCustomer
+package com.mercadolivro.application.usecase.customer.deleteCustomer
 
 import com.mercadolivro.application.command.DeleteCustomerByIdCommand
 

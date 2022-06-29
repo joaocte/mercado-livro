@@ -9,5 +9,5 @@ data class Book(
     var name: String,
     var price: BigDecimal,
     var status: BookStatus? = null,
-    var customerModel: Customer? = null
+    var customerId: Long? = null
 )
