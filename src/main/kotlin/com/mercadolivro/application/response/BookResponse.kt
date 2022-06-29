@@ -1,11 +1,11 @@
 package com.mercadolivro.application.response
 
-import com.mercadolivro.domain.BookStatus
 import java.math.BigDecimal
 
-data class ListBookResponse (
+data class BookResponse (
     var id: Long,
     var name: String,
     var price: BigDecimal,
+    var status : String,
     var customerId: Long
 )

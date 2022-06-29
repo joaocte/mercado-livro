@@ -2,6 +2,7 @@ package com.mercadolivro.extension
 
 import com.mercadolivro.application.command.CreateBookCommand
 import com.mercadolivro.application.request.CreateBookRequest
+import com.mercadolivro.application.response.BookResponse
 import com.mercadolivro.application.response.CreateBookCommandResponse
 import com.mercadolivro.application.response.CreateBookRequestResponse
 import com.mercadolivro.domain.Book
@@ -34,4 +35,7 @@ fun CreateBookCommand.toDomain(bookStatus: BookStatus) : Book{
 
 fun Book.toModel(customerModel : CustomerModel?) : BookModel{
     return BookModel(name = this.name, price =  this.price, status =  this.status!!.toModel(), customerModel =  customerModel, id = null)
+}
+fun BookModel.toBookResponse() : BookResponse{
+    return BookResponse(this.id!!, this.name, this.price, this.status.toString(), this.customerModel?.id!!)
 }

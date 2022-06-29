@@ -7,7 +7,9 @@ import com.mercadolivro.extension.toDomain
 import com.mercadolivro.extension.toModel
 import com.mercadolivro.infrastructure.repository.IBookRepository
 import com.mercadolivro.infrastructure.repository.ICustomerRepository
+import org.springframework.stereotype.Service
 
+@Service
 class CreateBookUseCase (var customerRepository: ICustomerRepository, var bookRepository: IBookRepository) :
     ICreateBookUseCase
 {
