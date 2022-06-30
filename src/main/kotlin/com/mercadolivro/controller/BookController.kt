@@ -1,22 +1,15 @@
 package com.mercadolivro.controller
 
 import com.mercadolivro.application.request.CreateBookRequest
-import com.mercadolivro.application.request.CreateCustomerRequest
-import com.mercadolivro.application.request.UpdateCustomerRequest
 import com.mercadolivro.application.response.BookResponse
-import com.mercadolivro.application.response.CreateBookCommandResponse
 import com.mercadolivro.application.usecase.book.createBook.ICreateBookUseCase
+import com.mercadolivro.application.usecase.book.deleteBook.IDeleteBookUseCase
 import com.mercadolivro.application.usecase.book.getBook.IGetBookByIdUseCase
 import com.mercadolivro.application.usecase.book.listBook.IListActivateBookUseCase
 import com.mercadolivro.application.usecase.book.listBook.IListBookUseCase
-import com.mercadolivro.application.usecase.book.listBook.ListActivateBookUseCase
-import com.mercadolivro.application.usecase.customer.createCustomer.ICreateCustomerUseCase
-import com.mercadolivro.application.usecase.customer.deleteCustomer.IDeleteCustomerUseCase
-import com.mercadolivro.application.usecase.customer.getcustomer.IGetAllCustomersUseCase
-import com.mercadolivro.application.usecase.customer.getcustomer.IGetCustomerByIdUseCase
-import com.mercadolivro.application.usecase.customer.updateCustomer.IUpdateCustomerUseCase
-import com.mercadolivro.domain.Customer
-import com.mercadolivro.extension.*
+import com.mercadolivro.extension.toCommand
+import com.mercadolivro.extension.toDeleteBookByIdCommand
+import com.mercadolivro.extension.toGetBookByIdQuery
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -27,6 +20,7 @@ class BookController (
     private val getBookByIdUseCase: IGetBookByIdUseCase,
     private val listBookUseCase: IListBookUseCase,
     private val listActivateBookUseCase: IListActivateBookUseCase,
+    private val deleteBookUseCase : IDeleteBookUseCase
                            ) {
     @GetMapping
     fun getAll(): List<BookResponse> {
@@ -52,9 +46,9 @@ class BookController (
 //        updateCustomerUsecase.execute(updateCustomerRequest.toUpdateCustomerCommand(id))
 //    }
 //
-//    @DeleteMapping("/{id}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    fun deleteCustomer(@PathVariable id: Long){
-//        deleteCustomerUseCase.execute(id.toDeleteCustomerByIdCommand())
-//    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteBook(@PathVariable id: Long){
+        deleteBookUseCase.execute(id.toDeleteBookByIdCommand())
+    }
 }
