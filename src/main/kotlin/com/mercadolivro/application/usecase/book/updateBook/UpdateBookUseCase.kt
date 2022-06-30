@@ -3,7 +3,9 @@ package com.mercadolivro.application.usecase.book.updateBook
 import com.mercadolivro.application.command.UpdateBookCommand
 import com.mercadolivro.extension.toModel
 import com.mercadolivro.infrastructure.repository.IBookRepository
+import org.springframework.stereotype.Service
 
+@Service
 class UpdateBookUseCase(private val repository: IBookRepository) : IUpdateBookUseCase {
     override fun execute(updateBookCommand: UpdateBookCommand)
     {

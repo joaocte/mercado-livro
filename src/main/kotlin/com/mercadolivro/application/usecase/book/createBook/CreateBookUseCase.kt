@@ -26,7 +26,7 @@ class CreateBookUseCase (var customerRepository: ICustomerRepository, var bookRe
             throw Exception("Book already registered")
 
 
-        val bookDomain = createBookCommand.toDomain(BookStatus.ATIVO);
+        val bookDomain = createBookCommand.toDomain(BookStatus.ACTIVE);
 
 
         val bookModel = bookDomain.toModel(customer.get())

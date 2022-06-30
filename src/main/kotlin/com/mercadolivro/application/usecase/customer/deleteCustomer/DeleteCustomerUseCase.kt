@@ -1,20 +1,29 @@
 package com.mercadolivro.application.usecase.customer.deleteCustomer
 
 import com.mercadolivro.application.command.DeleteCustomerByIdCommand
+import com.mercadolivro.application.usecase.book.deleteBook.IDeleteAllBooksFromCustomerUseCase
+import com.mercadolivro.extension.toDomain
+import com.mercadolivro.infrastructure.model.CustomerStatusModel
 import com.mercadolivro.infrastructure.repository.ICustomerRepository
 import org.springframework.stereotype.Service
 
 @Service
-class DeleteCustomerUseCase (private val ICustomerRepository: ICustomerRepository) : IDeleteCustomerUseCase {
+class DeleteCustomerUseCase (private val repository: ICustomerRepository,
+                             private val deleteAllBooksFromCustomerUseCase: IDeleteAllBooksFromCustomerUseCase
+) : IDeleteCustomerUseCase {
     override fun execute(deleteCustomerByIdCommand: DeleteCustomerByIdCommand) {
 
 
-        var customerRegistered = ICustomerRepository.existsById(deleteCustomerByIdCommand.id)
+        var customerRegistered = repository.findById(deleteCustomerByIdCommand.id)
 
-        if(!customerRegistered)
+        if(customerRegistered.isEmpty)
             throw Exception("Customer Not Found")
 
-        ICustomerRepository.deleteById(deleteCustomerByIdCommand.id)
+        val customerUpdated = customerRegistered.get()
+        customerUpdated.status = CustomerStatusModel.INACTIVE
 
+        repository.save(customerUpdated)
+
+        deleteAllBooksFromCustomerUseCase.execute(customerUpdated.toDomain())
     }
 }

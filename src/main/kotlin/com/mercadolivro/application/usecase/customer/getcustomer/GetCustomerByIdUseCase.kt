@@ -13,6 +13,6 @@ class GetCustomerByIdUseCase (private val ICustomerRepository: ICustomerReposito
     override fun execute(getCustomerByIdQuery: GetCustomerByIdQuery): Customer {
         var customer = ICustomerRepository.findById(getCustomerByIdQuery.id)
 
-        return customer?.get()?.toDomain()
+        return customer.get().toDomain()
     }
 }

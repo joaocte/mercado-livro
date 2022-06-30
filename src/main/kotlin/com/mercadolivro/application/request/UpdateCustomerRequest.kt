@@ -1,3 +1,5 @@
 package com.mercadolivro.application.request
 
-data class UpdateCustomerRequest(var name: String, var email: String)
+import com.mercadolivro.domain.CustomerStatus
+
+data class UpdateCustomerRequest(var name: String, var email: String, var status : CustomerStatus)

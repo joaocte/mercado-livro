@@ -9,4 +9,6 @@ import java.util.Optional
 interface IBookRepository : CrudRepository<BookModel, Long> {
     fun existsByNameAndCustomerModel(name:String, customerModel: CustomerModel): Boolean
     fun findByStatus(statusModel: BookStatusModel) : List<Optional<BookModel>>
+    fun findByCustomerModel(customerModel: CustomerModel): List<BookModel>
+
 }

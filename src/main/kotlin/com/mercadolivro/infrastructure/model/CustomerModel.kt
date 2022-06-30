@@ -12,6 +12,8 @@ data class CustomerModel(
     @Column
     var name: String,
     @Column
-    var email: String
+    var email: String,
+    @Column
+    var status : CustomerStatusModel
 
 )

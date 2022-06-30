@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 @Service
 class ListActivateBookUseCase(val repository: IBookRepository) : IListActivateBookUseCase {
     override fun execute(): List<BookResponse> {
-        var books = repository.findByStatus(BookStatusModel.ATIVO)
+        var books = repository.findByStatus(BookStatusModel.ACTIVE)
 
         if(books.isEmpty())
             throw Exception("no active books found")
