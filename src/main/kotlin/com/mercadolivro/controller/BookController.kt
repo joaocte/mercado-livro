@@ -1,15 +1,19 @@
 package com.mercadolivro.controller
 
 import com.mercadolivro.application.request.CreateBookRequest
+import com.mercadolivro.application.request.UpdateBookRequest
 import com.mercadolivro.application.response.BookResponse
 import com.mercadolivro.application.usecase.book.createBook.ICreateBookUseCase
 import com.mercadolivro.application.usecase.book.deleteBook.IDeleteBookUseCase
 import com.mercadolivro.application.usecase.book.getBook.IGetBookByIdUseCase
 import com.mercadolivro.application.usecase.book.listBook.IListActivateBookUseCase
 import com.mercadolivro.application.usecase.book.listBook.IListBookUseCase
+import com.mercadolivro.application.usecase.book.updateBook.IUpdateBookUseCase
+import com.mercadolivro.application.usecase.book.updateBook.UpdateBookUseCase
 import com.mercadolivro.extension.toCommand
 import com.mercadolivro.extension.toDeleteBookByIdCommand
 import com.mercadolivro.extension.toGetBookByIdQuery
+import com.mercadolivro.extension.toUpdateBookCommand
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -20,7 +24,8 @@ class BookController (
     private val getBookByIdUseCase: IGetBookByIdUseCase,
     private val listBookUseCase: IListBookUseCase,
     private val listActivateBookUseCase: IListActivateBookUseCase,
-    private val deleteBookUseCase : IDeleteBookUseCase
+    private val deleteBookUseCase : IDeleteBookUseCase,
+    private val updateBookUseCase: IUpdateBookUseCase
                            ) {
     @GetMapping
     fun getAll(): List<BookResponse> {
@@ -40,15 +45,16 @@ class BookController (
         return  listActivateBookUseCase.execute()
     }
 
-//    @PutMapping("/{id}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    fun updateCustomer(@PathVariable id: Long, @RequestBody updateCustomerRequest: UpdateCustomerRequest){
-//        updateCustomerUsecase.execute(updateCustomerRequest.toUpdateCustomerCommand(id))
-//    }
-//
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun updateCustomer(@PathVariable id: Long, @RequestBody updateBookRequest: UpdateBookRequest){
+        updateBookUseCase.execute(updateBookRequest.toUpdateBookCommand(id))
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteBook(@PathVariable id: Long){
         deleteBookUseCase.execute(id.toDeleteBookByIdCommand())
     }
 }
+

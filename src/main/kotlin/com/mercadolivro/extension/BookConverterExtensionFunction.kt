@@ -3,8 +3,10 @@ package com.mercadolivro.extension
 import com.mercadolivro.application.command.CreateBookCommand
 import com.mercadolivro.application.command.DeleteBookByIdCommand
 import com.mercadolivro.application.command.DeleteCustomerByIdCommand
+import com.mercadolivro.application.command.UpdateBookCommand
 import com.mercadolivro.application.query.book.GetBookByIdQuery
 import com.mercadolivro.application.request.CreateBookRequest
+import com.mercadolivro.application.request.UpdateBookRequest
 import com.mercadolivro.application.response.BookResponse
 import com.mercadolivro.application.response.CreateBookCommandResponse
 import com.mercadolivro.application.response.CreateBookRequestResponse
@@ -13,6 +15,7 @@ import com.mercadolivro.domain.BookStatus
 import com.mercadolivro.infrastructure.model.BookModel
 import com.mercadolivro.infrastructure.model.BookStatusModel
 import com.mercadolivro.infrastructure.model.CustomerModel
+import org.hibernate.loader.plan.exec.process.spi.ReturnReader
 
 fun BookStatusModel.toDomain() : BookStatus {
     return enumValueOf(this.name)
@@ -48,4 +51,11 @@ fun Long.toGetBookByIdQuery(): GetBookByIdQuery {
 }
 fun Long.toDeleteBookByIdCommand() : DeleteBookByIdCommand {
     return DeleteBookByIdCommand(this)
+}
+fun UpdateBookCommand.toModel(bookModel: BookModel) : BookModel{
+    return BookModel(this.id, this.name, this.price, bookModel.status, bookModel.customerModel)
+}
+
+fun UpdateBookRequest.toUpdateBookCommand(id: Long): UpdateBookCommand {
+    return UpdateBookCommand(id, this.name, this.price)
 }
