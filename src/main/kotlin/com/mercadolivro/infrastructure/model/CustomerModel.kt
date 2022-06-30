@@ -1,5 +1,6 @@
 package com.mercadolivro.infrastructure.model
 
+import java.lang.reflect.Type
 import java.util.UUID
 import javax.persistence.*
 
@@ -14,6 +15,7 @@ data class CustomerModel(
     @Column
     var email: String,
     @Column
+    @Enumerated(EnumType.STRING)
     var status : CustomerStatusModel
 
 )

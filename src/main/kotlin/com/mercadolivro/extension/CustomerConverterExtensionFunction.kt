@@ -20,7 +20,7 @@ fun CreateCustomerRequest.toCreateCustomerCommand(): CreateCustomerCommand{
 
 
 fun UpdateCustomerRequest.toUpdateCustomerCommand(id: Long): UpdateCustomerCommand{
-    return UpdateCustomerCommand(id,this.name, this.email, this.status)
+    return UpdateCustomerCommand(id,this.name, this.email)
 }
 
 fun Long.toGetCustomerByIdQuery() : GetCustomerByIdQuery {
@@ -34,15 +34,15 @@ fun Long.toDeleteCustomerByIdCommand(): DeleteCustomerByIdCommand{
 fun CreateCustomerCommand.toCustomerModelInfra() : CustomerModel {
     return CustomerModel(null, this.name, this.email, CustomerStatusModel.ACTIVE)
 }
-fun UpdateCustomerCommand.toCustomerModelInfra(): CustomerModel {
-    return CustomerModel(this.id, this.name, this.email, this.status.toModel())
+fun UpdateCustomerCommand.toCustomerModelInfra(customerModel : CustomerModel): CustomerModel {
+    return CustomerModel(this.id, this.name, this.email, customerModel.status)
 }
 
 fun CreateCustomerCommand.toCustomerModelDomain() : Customer {
     return  Customer (null, this.name, this.email, CustomerStatus.ACTIVE)
 }
-fun UpdateCustomerCommand.toCustomerModelDomain():  Customer  {
-    return  Customer (this.id, this.name, this.email, this.status)
+fun UpdateCustomerCommand.toCustomerModelDomain(customerModel: CustomerModel):  Customer  {
+    return  Customer (this.id, this.name, this.email, customerModel.status.toDomain())
 }
 fun  Customer.toModel() : CustomerModel{
     return CustomerModel(this.id, this.name, this.email, this.status.toModel())

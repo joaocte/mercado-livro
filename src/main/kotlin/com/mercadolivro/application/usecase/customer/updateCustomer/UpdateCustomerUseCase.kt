@@ -11,13 +11,12 @@ class UpdateCustomerUseCase(
 ) : IUpdateCustomerUseCase {
     override fun execute(updateCustomerCommand: UpdateCustomerCommand) {
 
-        val customer = updateCustomerCommand.toCustomerModelInfra();
+        val customerModel =  ICustomerRepository.findById(updateCustomerCommand.id)
 
-        var customerNotFound =  ICustomerRepository.existsById(customer.id!!)
-
-        if(!customerNotFound) {
+        if(!customerModel.isPresent)
             throw Exception("Customer Not Found")
-        }
+
+        val customer = updateCustomerCommand.toCustomerModelInfra(customerModel.get());
 
         ICustomerRepository.save(customer)
 
