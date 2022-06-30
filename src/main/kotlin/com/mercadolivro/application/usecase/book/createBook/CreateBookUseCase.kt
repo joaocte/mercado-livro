@@ -15,22 +15,24 @@ class CreateBookUseCase (var customerRepository: ICustomerRepository, var bookRe
 {
     override fun execute(createBookCommand: CreateBookCommand): CreateBookCommandResponse {
 
-        var customer = customerRepository.findById(createBookCommand.customerId!!).get()
-            ?: throw Exception ("Customer not found!")
+        val customer = customerRepository.findById(createBookCommand.customerId)
 
-        var bookRegistered = bookRepository.existsByNameAndCustomerId(createBookCommand.name, createBookCommand.customerId)
+        if(customer.isEmpty)
+            throw Exception("Customer not found")
+
+        val bookRegistered = bookRepository.existsByNameAndCustomerModel(createBookCommand.name, customer.get())
 
         if(bookRegistered)
             throw Exception("Book already registered")
 
 
-        var bookDomain = createBookCommand.toDomain(BookStatus.ATIVO);
+        val bookDomain = createBookCommand.toDomain(BookStatus.ATIVO);
 
 
-        var bookModel = bookDomain.toModel(customer)
+        val bookModel = bookDomain.toModel(customer.get())
 
 
-        var bookSaved = bookRepository.save(bookModel)
+        val bookSaved = bookRepository.save(bookModel)
 
         return CreateBookCommandResponse(bookSaved.id!!)
 

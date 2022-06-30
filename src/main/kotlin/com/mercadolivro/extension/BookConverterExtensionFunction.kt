@@ -1,6 +1,8 @@
 package com.mercadolivro.extension
 
 import com.mercadolivro.application.command.CreateBookCommand
+import com.mercadolivro.application.command.DeleteCustomerByIdCommand
+import com.mercadolivro.application.query.book.GetBookByIdQuery
 import com.mercadolivro.application.request.CreateBookRequest
 import com.mercadolivro.application.response.BookResponse
 import com.mercadolivro.application.response.CreateBookCommandResponse
@@ -38,4 +40,8 @@ fun Book.toModel(customerModel : CustomerModel?) : BookModel{
 }
 fun BookModel.toBookResponse() : BookResponse{
     return BookResponse(this.id!!, this.name, this.price, this.status.toString(), this.customerModel?.id!!)
+}
+
+fun Long.toGetBookByIdQuery(): GetBookByIdQuery {
+    return GetBookByIdQuery(this)
 }

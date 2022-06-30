@@ -7,12 +7,10 @@ import com.mercadolivro.application.usecase.customer.deleteCustomer.IDeleteCusto
 import com.mercadolivro.application.usecase.customer.getcustomer.IGetAllCustomersUseCase
 import com.mercadolivro.application.usecase.customer.getcustomer.IGetCustomerByIdUseCase
 import com.mercadolivro.application.usecase.customer.updateCustomer.IUpdateCustomerUseCase
-import com.mercadolivro.controller.extension.*
 import com.mercadolivro.domain.Customer
 import com.mercadolivro.extension.*
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 @RestController
 @RequestMapping("customers")

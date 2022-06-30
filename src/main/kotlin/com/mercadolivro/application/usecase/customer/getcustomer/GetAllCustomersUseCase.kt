@@ -1,6 +1,6 @@
 package com.mercadolivro.application.usecase.customer.getcustomer
 
-import com.mercadolivro.application.query.GetAllCustomersFilter
+import com.mercadolivro.application.query.customer.GetAllCustomersFilter
 import com.mercadolivro.domain.Customer
 import com.mercadolivro.extension.toDomain
 import com.mercadolivro.infrastructure.repository.ICustomerRepository

@@ -3,13 +3,12 @@ package com.mercadolivro.extension
 import com.mercadolivro.application.command.CreateCustomerCommand
 import com.mercadolivro.application.command.DeleteCustomerByIdCommand
 import com.mercadolivro.application.command.UpdateCustomerCommand
-import com.mercadolivro.application.query.GetAllCustomersFilter
-import com.mercadolivro.application.query.GetCustomerByIdQuery
+import com.mercadolivro.application.query.customer.GetAllCustomersFilter
+import com.mercadolivro.application.query.customer.GetCustomerByIdQuery
 import com.mercadolivro.application.request.CreateCustomerRequest
 import com.mercadolivro.application.request.UpdateCustomerRequest
 import com.mercadolivro.domain.Customer
 import com.mercadolivro.infrastructure.model.CustomerModel
-import java.util.*
 
 fun CreateCustomerRequest.toCreateCustomerCommand(): CreateCustomerCommand{
     return CreateCustomerCommand(this.name, this.email)
@@ -20,7 +19,7 @@ fun UpdateCustomerRequest.toUpdateCustomerCommand(id: Long): UpdateCustomerComma
     return UpdateCustomerCommand(id,this.name, this.email)
 }
 
-fun Long.toGetCustomerByIdQuery() : GetCustomerByIdQuery{
+fun Long.toGetCustomerByIdQuery() : GetCustomerByIdQuery {
     return  GetCustomerByIdQuery(this)
 }
 

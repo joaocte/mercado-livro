@@ -1,4 +1,4 @@
-package com.mercadolivro.application.query
+package com.mercadolivro.application.query.customer
 
 import java.util.UUID
 
