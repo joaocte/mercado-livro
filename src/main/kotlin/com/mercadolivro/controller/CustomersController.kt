@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("customers")
@@ -34,7 +35,7 @@ class CustomersController (
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun createCustomer(@RequestBody createCustomerRequest: CreateCustomerRequest) {
+    fun createCustomer(@RequestBody @Valid createCustomerRequest: CreateCustomerRequest) {
         createCustomerUseCase.execute(createCustomerRequest.toCreateCustomerCommand())
     }
 
@@ -45,7 +46,7 @@ class CustomersController (
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun updateCustomer(@PathVariable id: Long, @RequestBody updateCustomerRequest: UpdateCustomerRequest){
+    fun updateCustomer(@PathVariable id: Long, @RequestBody @Valid updateCustomerRequest: UpdateCustomerRequest){
         updateCustomerUsecase.execute(updateCustomerRequest.toUpdateCustomerCommand(id))
     }
 

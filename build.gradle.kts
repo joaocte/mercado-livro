@@ -25,7 +25,9 @@ dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.modelmapper:modelmapper:3.1.0")
 	implementation ("org.flywaydb:flyway-core")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 
+	compileOnly("org.springframework.boot:spring-boot-devtools")
 
 	runtimeOnly ("mysql:mysql-connector-java")
 
