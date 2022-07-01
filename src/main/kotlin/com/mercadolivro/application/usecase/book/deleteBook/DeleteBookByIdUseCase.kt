@@ -1,6 +1,8 @@
 package com.mercadolivro.application.usecase.book.deleteBook
 
 import com.mercadolivro.application.command.DeleteBookByIdCommand
+import com.mercadolivro.exception.Errors
+import com.mercadolivro.exception.customException.NotFoundException
 import com.mercadolivro.infrastructure.model.BookStatusModel
 import com.mercadolivro.infrastructure.repository.IBookRepository
 import org.springframework.stereotype.Service
@@ -11,7 +13,7 @@ class DeleteBookByIdUseCase (val repository: IBookRepository) :IDeleteBookByIdUs
         val book = repository.findById(deleteBookCommand.id)
 
         if (book.isEmpty)
-        throw Exception("Book not found")
+        throw NotFoundException(Errors.MLB1000.message.format(deleteBookCommand.id), Errors.MLB1000.code)
 
         val bookModel = book.get()
 

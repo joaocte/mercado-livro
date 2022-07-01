@@ -1,6 +1,8 @@
 package com.mercadolivro.application.usecase.book.updateBook
 
 import com.mercadolivro.application.command.UpdateBookCommand
+import com.mercadolivro.exception.Errors
+import com.mercadolivro.exception.customException.NotFoundException
 import com.mercadolivro.extension.toModel
 import com.mercadolivro.infrastructure.repository.IBookRepository
 import org.springframework.stereotype.Service
@@ -11,8 +13,8 @@ class UpdateBookUseCase(private val repository: IBookRepository) : IUpdateBookUs
     {
         val book = repository.findById(updateBookCommand.id)
 
-        if(book.isEmpty)
-            throw Exception("Book not found")
+        if(!book.isPresent)
+            throw NotFoundException(Errors.MLB1000.message.format(updateBookCommand.id), Errors.MLB1000.code)
 
         var updatedBookModel = updateBookCommand.toModel(book.get())
 

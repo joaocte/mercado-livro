@@ -1,6 +1,8 @@
 package com.mercadolivro.application.usecase.book.listBook
 
 import com.mercadolivro.application.response.BookResponse
+import com.mercadolivro.exception.Errors
+import com.mercadolivro.exception.customException.NotFoundException
 import com.mercadolivro.extension.toBookResponse
 import com.mercadolivro.infrastructure.repository.IBookRepository
 import org.springframework.data.domain.Page
@@ -10,6 +12,11 @@ import org.springframework.stereotype.Service
 @Service
 class LisBookUseCase(val bookRepository: IBookRepository)  : IListBookUseCase {
     override fun execute(pageble: Pageable): Page<BookResponse> {
-        return bookRepository.findAll(pageble).map {it.toBookResponse() };
+        val books =  bookRepository.findAll(pageble)
+
+        if(books.isEmpty)
+            throw NotFoundException(Errors.MLB1001.message, Errors.MLB1001.code)
+
+        return books.map { it.toBookResponse() }
     }
 }
