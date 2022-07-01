@@ -1,7 +1,9 @@
 package com.mercadolivro.application.usecase.customer.getcustomer
 
 import com.mercadolivro.application.query.customer.GetCustomerByIdQuery
+import com.mercadolivro.application.response.CustomerResponse
 import com.mercadolivro.domain.Customer
+import com.mercadolivro.extension.toCustomerResponse
 import com.mercadolivro.extension.toDomain
 import com.mercadolivro.infrastructure.repository.ICustomerRepository
 import org.springframework.stereotype.Service
@@ -10,9 +12,9 @@ import org.springframework.stereotype.Service
 @Service
 class GetCustomerByIdUseCase (private val ICustomerRepository: ICustomerRepository) : IGetCustomerByIdUseCase
 {
-    override fun execute(getCustomerByIdQuery: GetCustomerByIdQuery): Customer {
+    override fun execute(getCustomerByIdQuery: GetCustomerByIdQuery): CustomerResponse {
         var customer = ICustomerRepository.findById(getCustomerByIdQuery.id)
 
-        return customer.get().toDomain()
+        return customer.get().toCustomerResponse()
     }
 }

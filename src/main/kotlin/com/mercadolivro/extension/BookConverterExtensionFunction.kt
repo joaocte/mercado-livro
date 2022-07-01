@@ -16,6 +16,7 @@ import com.mercadolivro.infrastructure.model.BookModel
 import com.mercadolivro.infrastructure.model.BookStatusModel
 import com.mercadolivro.infrastructure.model.CustomerModel
 import org.hibernate.loader.plan.exec.process.spi.ReturnReader
+import org.springframework.data.domain.Page
 
 fun BookStatusModel.toDomain() : BookStatus {
     return enumValueOf(this.name)

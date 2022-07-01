@@ -2,13 +2,16 @@ package com.mercadolivro.controller
 
 import com.mercadolivro.application.request.CreateCustomerRequest
 import com.mercadolivro.application.request.UpdateCustomerRequest
+import com.mercadolivro.application.response.CustomerResponse
 import com.mercadolivro.application.usecase.customer.createCustomer.ICreateCustomerUseCase
 import com.mercadolivro.application.usecase.customer.deleteCustomer.IDeleteCustomerUseCase
 import com.mercadolivro.application.usecase.customer.getcustomer.IGetAllCustomersUseCase
 import com.mercadolivro.application.usecase.customer.getcustomer.IGetCustomerByIdUseCase
 import com.mercadolivro.application.usecase.customer.updateCustomer.IUpdateCustomerUseCase
-import com.mercadolivro.domain.Customer
 import com.mercadolivro.extension.*
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -24,8 +27,8 @@ class CustomersController (
 
 
     @GetMapping
-    fun getAll(@RequestParam name: String?): List<Customer> {
-            return getAllCustomersUseCase.execute(name?.toGetAllCustomersFilter())
+    fun getAll(@RequestParam name: String?, @PageableDefault(page = 0, size = 10) pageble: Pageable): Page<CustomerResponse> {
+            return getAllCustomersUseCase.execute(name?.toGetAllCustomersFilter(), pageble)
 
     }
 
@@ -36,7 +39,7 @@ class CustomersController (
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: Long): Customer {
+    fun getById(@PathVariable id: Long): CustomerResponse {
         return  getCustomerById.execute(id.toGetCustomerByIdQuery())
     }
 

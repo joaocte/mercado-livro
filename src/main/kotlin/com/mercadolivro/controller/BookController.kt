@@ -13,6 +13,9 @@ import com.mercadolivro.extension.toCommand
 import com.mercadolivro.extension.toDeleteBookByIdCommand
 import com.mercadolivro.extension.toGetBookByIdQuery
 import com.mercadolivro.extension.toUpdateBookCommand
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -26,10 +29,6 @@ class BookController (
     private val deleteBookUseCase : IDeleteBookByIdUseCase,
     private val updateBookUseCase: IUpdateBookUseCase
                            ) {
-    @GetMapping
-    fun getAll(): List<BookResponse> {
-            return listBookUseCase.execute()
-    }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun createCustomer(@RequestBody createBookRequest: CreateBookRequest) {
@@ -40,10 +39,13 @@ class BookController (
         return  getBookByIdUseCase.execute(id.toGetBookByIdQuery())
     }
     @GetMapping("/active")
-    fun getById(): List<BookResponse> {
-        return  listActivateBookUseCase.execute()
+    fun getActive(@PageableDefault(page = 0, size = 10) pageble: Pageable): Page<BookResponse> {
+        return  listActivateBookUseCase.execute(pageble)
     }
-
+    @GetMapping
+    fun getAll(@PageableDefault(page = 0, size = 10) pageble: Pageable): Page<BookResponse> {
+        return listBookUseCase.execute(pageble)
+    }
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun updateCustomer(@PathVariable id: Long, @RequestBody updateBookRequest: UpdateBookRequest){

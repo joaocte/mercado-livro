@@ -7,6 +7,7 @@ import com.mercadolivro.application.query.customer.GetAllCustomersFilter
 import com.mercadolivro.application.query.customer.GetCustomerByIdQuery
 import com.mercadolivro.application.request.CreateCustomerRequest
 import com.mercadolivro.application.request.UpdateCustomerRequest
+import com.mercadolivro.application.response.CustomerResponse
 import com.mercadolivro.domain.BookStatus
 import com.mercadolivro.domain.Customer
 import com.mercadolivro.domain.CustomerStatus
@@ -65,4 +66,10 @@ fun CustomerStatusModel.toDomain() : CustomerStatus {
 
 fun CustomerStatus.toModel() : CustomerStatusModel {
     return enumValueOf(this.name)
+}
+fun Customer.toCustomerResponse(): CustomerResponse{
+    return CustomerResponse(this.id,this.name, this.email, this.status)
+}
+fun CustomerModel.toCustomerResponse() : CustomerResponse{
+    return CustomerResponse(this.id, this.name, this.email, this.status.toDomain())
 }
