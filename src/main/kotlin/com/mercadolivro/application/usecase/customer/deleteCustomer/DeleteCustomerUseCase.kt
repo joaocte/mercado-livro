@@ -7,9 +7,10 @@ import com.mercadolivro.exception.customException.NotFoundException
 import com.mercadolivro.extension.toDeleteBookByIdCommand
 import com.mercadolivro.infrastructure.model.CustomerStatusModel
 import com.mercadolivro.infrastructure.repository.ICustomerRepository
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
-@Service
+@Component
 class DeleteCustomerUseCase (private val repository: ICustomerRepository,
                              private val deleteAllBooksFromCustomerUseCase: IDeleteAllBooksFromCustomerUseCase
 ) : IDeleteCustomerUseCase {

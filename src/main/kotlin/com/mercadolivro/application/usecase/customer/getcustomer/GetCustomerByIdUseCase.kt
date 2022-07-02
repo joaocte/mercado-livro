@@ -6,10 +6,11 @@ import com.mercadolivro.exception.Errors
 import com.mercadolivro.exception.customException.NotFoundException
 import com.mercadolivro.extension.toCustomerResponse
 import com.mercadolivro.infrastructure.repository.ICustomerRepository
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
 
-@Service
+@Component
 class GetCustomerByIdUseCase (private val ICustomerRepository: ICustomerRepository) : IGetCustomerByIdUseCase
 {
     override fun execute(getCustomerByIdQuery: GetCustomerByIdQuery): CustomerResponse {

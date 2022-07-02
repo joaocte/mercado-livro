@@ -5,9 +5,10 @@ import com.mercadolivro.exception.Errors
 import com.mercadolivro.exception.customException.AlreadyRegisteredException
 import com.mercadolivro.extension.toCustomerModelInfra
 import com.mercadolivro.infrastructure.repository.ICustomerRepository
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
-@Service
+@Component
 class CreateCustomerUsecase (private val ICustomerRepository: ICustomerRepository) : ICreateCustomerUseCase {
 
     override fun execute(createCustomerCommand: CreateCustomerCommand) {

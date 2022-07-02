@@ -6,9 +6,10 @@ import com.mercadolivro.exception.Errors
 import com.mercadolivro.exception.customException.NotFoundException
 import com.mercadolivro.extension.toBookResponse
 import com.mercadolivro.infrastructure.repository.IBookRepository
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
-@Service
+@Component
 class GetbookByIdUseCase (val repository: IBookRepository) : IGetBookByIdUseCase {
     override fun execute(getBookByIdQuery: GetBookByIdQuery): BookResponse {
         var book = repository.findById(getBookByIdQuery.id)

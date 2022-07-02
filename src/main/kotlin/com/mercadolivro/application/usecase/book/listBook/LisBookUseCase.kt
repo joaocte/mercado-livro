@@ -7,9 +7,10 @@ import com.mercadolivro.extension.toBookResponse
 import com.mercadolivro.infrastructure.repository.IBookRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
-@Service
+@Component
 class LisBookUseCase(val bookRepository: IBookRepository)  : IListBookUseCase {
     override fun execute(pageble: Pageable): Page<BookResponse> {
         val books =  bookRepository.findAll(pageble)

@@ -5,9 +5,10 @@ import com.mercadolivro.exception.Errors
 import com.mercadolivro.exception.customException.NotFoundException
 import com.mercadolivro.infrastructure.model.BookStatusModel
 import com.mercadolivro.infrastructure.repository.IBookRepository
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
-@Service
+@Component
 class DeleteBookByIdUseCase (val repository: IBookRepository) :IDeleteBookByIdUseCase {
     override fun execute(deleteBookCommand: DeleteBookByIdCommand) {
         val book = repository.findById(deleteBookCommand.id)
