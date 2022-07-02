@@ -14,7 +14,11 @@ data class Purchase (
 
     val books: List<Book>,
 
-    val nfe: String,
+    val nfe: String?,
 
-    val price: BigDecimal
+    val price: BigDecimal,
+
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+
+    val updatedAt: LocalDateTime = LocalDateTime.now()
     )

@@ -11,11 +11,8 @@ data class CreateBookRequest (
     @field:NotEmpty
     var name: String,
     @field:NotNull
-    @field:NotBlank
     var price: BigDecimal,
     @field:NotNull
-    @field:NotBlank
     @JsonAlias("customer_id")
-
     var customerId : Long
     )

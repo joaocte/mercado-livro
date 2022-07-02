@@ -60,3 +60,8 @@ fun UpdateBookCommand.toModel(bookModel: BookModel) : BookModel{
 fun UpdateBookRequest.toUpdateBookCommand(id: Long): UpdateBookCommand {
     return UpdateBookCommand(id, this.name, this.price)
 }
+
+
+fun BookModel.toDomain()  : Book{
+    return Book(this.id, this.name, this.price, this.status?.toDomain(), this.customerModel?.id   )
+}
