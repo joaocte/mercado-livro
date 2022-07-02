@@ -9,6 +9,7 @@ import com.mercadolivro.application.usecase.customer.getcustomer.IGetAllCustomer
 import com.mercadolivro.application.usecase.customer.getcustomer.IGetCustomerByIdUseCase
 import com.mercadolivro.application.usecase.customer.updateCustomer.IUpdateCustomerUseCase
 import com.mercadolivro.extension.*
+import com.mercadolivro.openApi.ICustomersController
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -24,35 +25,35 @@ class CustomersController (
     private val getAllCustomersUseCase: IGetAllCustomersUseCase,
     private val updateCustomerUsecase: IUpdateCustomerUseCase,
     private val deleteCustomerUseCase: IDeleteCustomerUseCase
-                           ) {
+                           ) : ICustomersController {
 
 
     @GetMapping
-    fun getAll(@RequestParam name: String?, @PageableDefault(page = 0, size = 10) pageble: Pageable): Page<CustomerResponse> {
+    override fun getAll(@RequestParam name: String?, @PageableDefault(page = 0, size = 10) pageble: Pageable): Page<CustomerResponse> {
             return getAllCustomersUseCase.execute(name?.toGetAllCustomersFilter(), pageble)
 
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun createCustomer(@RequestBody @Valid createCustomerRequest: CreateCustomerRequest) {
+    override fun createCustomer(@RequestBody @Valid createCustomerRequest: CreateCustomerRequest) {
         createCustomerUseCase.execute(createCustomerRequest.toCreateCustomerCommand())
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: Long): CustomerResponse {
+    override fun getById(@PathVariable id: Long): CustomerResponse {
         return  getCustomerById.execute(id.toGetCustomerByIdQuery())
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun updateCustomer(@PathVariable id: Long, @RequestBody @Valid updateCustomerRequest: UpdateCustomerRequest){
+    override fun updateCustomer(@PathVariable id: Long, @RequestBody @Valid updateCustomerRequest: UpdateCustomerRequest){
         updateCustomerUsecase.execute(updateCustomerRequest.toUpdateCustomerCommand(id))
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteCustomer(@PathVariable id: Long){
+    override fun deleteCustomer(@PathVariable id: Long){
         deleteCustomerUseCase.execute(id.toDeleteCustomerByIdCommand())
     }
 }

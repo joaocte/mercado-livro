@@ -12,7 +12,8 @@ plugins {
 group = "com.mercadolivro"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
-
+val springDocVersion = "1.6.9"
+val springDocKotlinVersion = "1.6.9"
 repositories {
 	mavenCentral()
 }
@@ -26,6 +27,11 @@ dependencies {
 	implementation("org.modelmapper:modelmapper:3.1.0")
 	implementation ("org.flywaydb:flyway-core")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+//	implementation("io.springfox:springfox-swagger2:3.0.0")
+//	implementation("io.springfox:springfox-swagger-ui:3.0.0")
+//	implementation("io.springfox:springfox-boot-starter:3.0.0")
+	implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
+    implementation("org.springdoc:springdoc-openapi-kotlin:$springDocKotlinVersion")
 
 	compileOnly("org.springframework.boot:spring-boot-devtools")
 

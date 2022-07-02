@@ -13,6 +13,7 @@ import com.mercadolivro.extension.toCommand
 import com.mercadolivro.extension.toDeleteBookByIdCommand
 import com.mercadolivro.extension.toGetBookByIdQuery
 import com.mercadolivro.extension.toUpdateBookCommand
+import com.mercadolivro.openApi.IBookController
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -29,33 +30,33 @@ class BookController (
     private val listActivateBookUseCase: IListActivateBookUseCase,
     private val deleteBookUseCase : IDeleteBookByIdUseCase,
     private val updateBookUseCase: IUpdateBookUseCase
-                           ) {
+                           )  : IBookController{
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun createCustomer(@RequestBody @Valid createBookRequest: CreateBookRequest) {
+    override fun createCustomer(@RequestBody @Valid createBookRequest: CreateBookRequest) {
         createBookUseCase.execute(createBookRequest.toCommand())
     }
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: Long): BookResponse {
+    override fun getById(@PathVariable id: Long): BookResponse {
         return  getBookByIdUseCase.execute(id.toGetBookByIdQuery())
     }
     @GetMapping("/active")
-    fun getActive(@PageableDefault(page = 0, size = 10) pageble: Pageable): Page<BookResponse> {
+    override fun getActive(@PageableDefault(page = 0, size = 10) pageble: Pageable): Page<BookResponse> {
         return  listActivateBookUseCase.execute(pageble)
     }
     @GetMapping
-    fun getAll(@PageableDefault(page = 0, size = 10) pageble: Pageable): Page<BookResponse> {
+    override fun getAll(@PageableDefault(page = 0, size = 10) pageble: Pageable): Page<BookResponse> {
         return listBookUseCase.execute(pageble)
     }
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun updateCustomer(@PathVariable id: Long, @RequestBody @Valid updateBookRequest: UpdateBookRequest){
+    override fun updateCustomer(@PathVariable id: Long, @RequestBody @Valid updateBookRequest: UpdateBookRequest){
         updateBookUseCase.execute(updateBookRequest.toUpdateBookCommand(id))
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteBook(@PathVariable id: Long){
+    override fun deleteBook(@PathVariable id: Long){
         deleteBookUseCase.execute(id.toDeleteBookByIdCommand())
     }
 }
