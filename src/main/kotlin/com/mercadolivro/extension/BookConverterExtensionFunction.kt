@@ -41,7 +41,7 @@ fun CreateBookCommand.toDomain(bookStatus: BookStatus) : Book{
 }
 
 fun Book.toModel(customerModel : CustomerModel?) : BookModel{
-    return BookModel(name = this.name, price =  this.price, status =  this.status!!.toModel(), customerModel =  customerModel, id = null)
+    return BookModel(id = this.id,  name = this.name, price =  this.price, status =  this.status!!.toModel(), customerModel =  customerModel)
 }
 fun BookModel.toBookResponse() : BookResponse{
     return BookResponse(this.id!!, this.name, this.price, this.status.toString(), this.customerModel?.id!!)
@@ -54,14 +54,18 @@ fun Long.toDeleteBookByIdCommand() : DeleteBookByIdCommand {
     return DeleteBookByIdCommand(this)
 }
 fun UpdateBookCommand.toModel(bookModel: BookModel) : BookModel{
-    return BookModel(this.id, this.name, this.price, bookModel.status, bookModel.customerModel)
+    return BookModel(this.id, this.name, this.price, (this.status ?: bookModel.status) as BookStatusModel?, bookModel.customerModel)
 }
 
 fun UpdateBookRequest.toUpdateBookCommand(id: Long): UpdateBookCommand {
-    return UpdateBookCommand(id, this.name, this.price)
+    return UpdateBookCommand(id, this.name, this.price, null)
 }
 
 
 fun BookModel.toDomain()  : Book{
     return Book(this.id, this.name, this.price, this.status?.toDomain(), this.customerModel?.id   )
+}
+
+ fun BookModel.toUpdateBookCommand(): UpdateBookCommand {
+    return UpdateBookCommand(this.id!!, this.name, this.price, this.status!!.toDomain())
 }

@@ -5,11 +5,14 @@ import com.mercadolivro.exception.Errors
 import com.mercadolivro.exception.customException.NotFoundException
 import com.mercadolivro.extension.toModel
 import com.mercadolivro.infrastructure.repository.IBookRepository
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
 @Component
 class UpdateBookUseCase(private val repository: IBookRepository) : IUpdateBookUseCase {
+
+    @Async
     override fun execute(updateBookCommand: UpdateBookCommand)
     {
         val book = repository.findById(updateBookCommand.id)
