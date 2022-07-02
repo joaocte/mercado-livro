@@ -23,13 +23,12 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.modelmapper:modelmapper:3.1.0")
 	implementation ("org.flywaydb:flyway-core")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-undertow")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-//	implementation("io.springfox:springfox-swagger2:3.0.0")
-//	implementation("io.springfox:springfox-swagger-ui:3.0.0")
-//	implementation("io.springfox:springfox-boot-starter:3.0.0")
+
 	implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
     implementation("org.springdoc:springdoc-openapi-kotlin:$springDocKotlinVersion")
 

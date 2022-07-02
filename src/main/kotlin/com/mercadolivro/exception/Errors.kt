@@ -8,6 +8,7 @@ enum class Errors(val code: String, val message: String) {
     MLB1001("MLB-1001", "Books don't exists"),
     MLB1002("MLB-1002", "Books already registered"),
     MLB1003("MLB-1003", "Cannot update book with status [%s]"),
+    MLB1004("MLB-1004", "Some selected books [%s], could not be found"),
 
 
     MLC2000("MLC-2000", "Customer [%s] not exists"),

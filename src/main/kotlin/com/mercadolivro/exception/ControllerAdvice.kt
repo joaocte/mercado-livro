@@ -3,6 +3,7 @@ package com.mercadolivro.exception
 import com.mercadolivro.exception.customException.AlreadyRegisteredException
 import com.mercadolivro.exception.customException.BadRequestException
 import com.mercadolivro.exception.customException.NotFoundException
+import com.mercadolivro.exception.customException.PreconditionFailedException
 import com.mercadolivro.extension.toNotificationResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -50,6 +51,16 @@ class ControllerAdvice {
             Errors.MLA0001.message,
             Errors.MLA0001.code,
             ex.bindingResult.fieldErrors.map{ it.toNotificationResponse()}
+        )
+        return ResponseEntity(response, response.status)
+    }
+    @ExceptionHandler(PreconditionFailedException::class)
+    fun handleNotFoundException(ex : PreconditionFailedException, request : WebRequest) : ResponseEntity<ExceptionResponse>{
+        var response = ExceptionResponse(
+            HttpStatus.PRECONDITION_FAILED,
+            ex.message,
+            ex.errorCode,
+            null
         )
         return ResponseEntity(response, response.status)
     }
