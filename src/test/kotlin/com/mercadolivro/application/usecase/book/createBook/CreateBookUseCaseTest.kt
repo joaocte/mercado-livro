@@ -19,9 +19,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
+import org.springframework.test.context.ActiveProfiles
 import java.util.*
 
 @ExtendWith(MockKExtension::class)
+@ActiveProfiles("test")
 class CreateBookUseCaseTest{
 
     @MockK
