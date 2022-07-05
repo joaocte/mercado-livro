@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
 @Component
-class CreateBookUseCase (var customerRepository: ICustomerRepository, var bookRepository: IBookRepository) :
+class CreateBookUseCase (
+    private val customerRepository: ICustomerRepository,
+    private val bookRepository: IBookRepository) :
     ICreateBookUseCase
 {
     override fun execute(createBookCommand: CreateBookCommand): CreateBookCommandResponse {

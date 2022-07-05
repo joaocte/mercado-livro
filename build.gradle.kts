@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.4.30"
 	kotlin("plugin.spring") version "1.4.30"
 	kotlin("plugin.jpa") version "1.4.30"
+	jacoco
 }
 
 
@@ -37,6 +38,8 @@ dependencies {
 	runtimeOnly ("mysql:mysql-connector-java")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.mockk:mockk:1.12.0")
+
 
 }
 
